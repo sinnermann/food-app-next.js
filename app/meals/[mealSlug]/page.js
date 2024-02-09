@@ -5,7 +5,11 @@ import { getMeal } from "@/lib/meals";
 export default function MealDetailPage({ params }) {
   const meal = getMeal(params.mealSlug);
 
-  meal.instructions = meal.instructions.replace(/\n/g, '<br />');
+  if (!meal) {
+    notFound();
+  }
+
+  meal.instructions = meal.instructions.replace(/\n/g, "<br />");
 
   return (
     <>
@@ -16,7 +20,7 @@ export default function MealDetailPage({ params }) {
         <div className={classes.headerText}>
           <h1>{meal.title}</h1>
           <p className={classes.creator}>
-            by <a href={`mailto: mail`}>{meal.creator}</a>
+            by <a href={`mailto: ${"mail"}`}>{meal.creator}</a>
           </p>
           <p className={classes.summary}>{meal.summary}</p>
         </div>
